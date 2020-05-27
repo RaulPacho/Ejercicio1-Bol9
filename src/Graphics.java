@@ -8,13 +8,14 @@ public class Graphics extends JFrame implements MouseListener, MouseMotionListen
     JButton boton1;
     JButton boton2;
     protected Color col = new Color(255,0,0);
+    String teclasContenido = "teclas";
     public Graphics() {
         super("Control Raton");
         setLayout(null);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         // teclas
-        teclas = new JLabel("Teclas");
+        teclas = new JLabel(teclasContenido);
         teclas.setSize(teclas.getPreferredSize().width, teclas.getPreferredSize().height);
         teclas.setLocation(100, 100);
         add(teclas);
@@ -24,6 +25,7 @@ public class Graphics extends JFrame implements MouseListener, MouseMotionListen
         boton1.setBounds(new Rectangle(100, 50, 85, 30));
         boton1.addMouseMotionListener(this);
         boton1.addMouseListener(this);
+        boton1.addKeyListener(this);
         add(boton1);
 
         // boton2
@@ -31,6 +33,7 @@ public class Graphics extends JFrame implements MouseListener, MouseMotionListen
         boton2.setBounds(new Rectangle(300, 50, 85, 30));
         boton2.addMouseMotionListener(this);
         boton2.addMouseListener(this);
+        boton2.addKeyListener(this);
         add(boton2);
 
         
@@ -62,7 +65,7 @@ public class Graphics extends JFrame implements MouseListener, MouseMotionListen
 
     @Override
     public void keyReleased(KeyEvent e) {
-        teclas.setText("Teclas");
+        teclas.setText(teclasContenido);
     }
 
     @Override
@@ -73,10 +76,11 @@ public class Graphics extends JFrame implements MouseListener, MouseMotionListen
 
     @Override
     public void mousePressed(java.awt.event.MouseEvent e) {
-        if (e.BUTTON1 == e.getButton()) {
+        if ( e.getButton() == e.BUTTON1) {
             boton1.setBackground(col);
             // boton1.setVisible(false);
         }
+        
         if (e.BUTTON3 == e.getButton()) { // Con mi raton por lo menos el Button2 es para la rueda
             boton2.setBackground(col);
             // boton1.setVisible(false);
@@ -95,7 +99,7 @@ public class Graphics extends JFrame implements MouseListener, MouseMotionListen
     @Override
     public void mouseEntered(java.awt.event.MouseEvent e) {
 
-        this.setTitle("Teclas - (" + e.getX() + "," + e.getY() + ")");
+        this.setTitle(teclasContenido + " - (" + e.getX() + "," + e.getY() + ")");
 
     }
 
@@ -114,11 +118,11 @@ public class Graphics extends JFrame implements MouseListener, MouseMotionListen
     public void mouseMoved(java.awt.event.MouseEvent e) {
 
         if (e.getSource() == boton1) {
-            this.setTitle("Teclas - (" + (boton1.getX() + e.getX() + 7) + "," + (boton1.getY() + e.getY() + 10) + ")");
+            this.setTitle(teclasContenido + " - (" + (boton1.getX() + e.getX() + 7) + "," + (boton1.getY() + e.getY() + 10) + ")");
         } else if (e.getSource() == boton2) {
-            this.setTitle("Teclas - (" + (boton2.getX() + e.getX() + 7) + "," + (boton2.getY() + e.getY() + 10) + ")");
+            this.setTitle(teclasContenido + " - (" + (boton2.getX() + e.getX() + 7) + "," + (boton2.getY() + e.getY() + 10) + ")");
         } else {
-            this.setTitle("Teclas - (" + e.getX() + "," + e.getY() + ")");
+            this.setTitle(teclasContenido + " - (" + e.getX() + "," + e.getY() + ")");
         }
     }
     public class Cerrar extends WindowAdapter{

@@ -8,13 +8,14 @@ public class SecundarioModal extends JDialog implements ActionListener {
     JLabel explicaCol;
     JComboBox<String> colores;
     JButton boton;
-    String[] difCol= {"verde","azul marino","amarillo","azul cian"};
+    String[] difCol = { "verde", "azul marino", "amarillo", "azul cian" };
+    Color[] colo = { Color.green, Color.BLUE, Color.yellow, Color.CYAN };
 
-    public SecundarioModal(Graphics gra){
+    public SecundarioModal(Graphics gra) {
         super(gra, true);
         setLayout(new FlowLayout());
         setTitle("Secundaria Modal");
-        setSize(200,200);
+        setSize(200, 200);
         explicaTit = new JLabel("Introduce el titulo");
         add(explicaTit);
 
@@ -36,27 +37,12 @@ public class SecundarioModal extends JDialog implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Graphics gra=(Graphics)this.getOwner();
-        gra.setTitle(titulo.getText());
+        Graphics gra = (Graphics) this.getOwner();
+        gra.teclasContenido = titulo.getText();
 
-        switch(colores.getSelectedIndex()){
-            case 0:
-                gra.col = new Color(0,255,0);
-                break;
-            case 1:
-                gra.col = new Color(0,0,255);
-                break;
-            case 2:
-                gra.col = new Color(255,255,0);
-                break;
-            case 3:
-                gra.col = new Color(0,255,255);
-                break;
+        gra.col = colo[colores.getSelectedIndex()];
 
-        }
-        
         dispose();
     }
-
 
 }
