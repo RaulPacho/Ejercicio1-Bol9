@@ -24,7 +24,7 @@ public class Graphics extends JFrame implements MouseListener, MouseMotionListen
         // boton1
         boton1 = new JButton("Boton 1");
         boton1.setBounds(new Rectangle(100, 50, 85, 30));
-        //boton1.addMouseMotionListener(this);
+        boton1.addMouseMotionListener(this);
         boton1.addMouseListener(this);
         boton1.addKeyListener(this);
         add(boton1);
@@ -32,7 +32,7 @@ public class Graphics extends JFrame implements MouseListener, MouseMotionListen
         // boton2
         boton2 = new JButton("Boton 2");
         boton2.setBounds(new Rectangle(300, 50, 85, 30));
-        //boton2.addMouseMotionListener(this);
+        boton2.addMouseMotionListener(this);
         boton2.addMouseListener(this);
         boton2.addKeyListener(this);
         add(boton2);
@@ -101,7 +101,13 @@ public class Graphics extends JFrame implements MouseListener, MouseMotionListen
     @Override
     public void mouseEntered(java.awt.event.MouseEvent e) {
 
-        this.setTitle(teclasContenido + " - (" + e.getX() + "," + e.getY() + ")");
+        if (e.getSource().getClass() == new JButton().getClass()) {
+            System.err.println("sep");
+            this.setTitle("Teclas - (" + (((JButton)e.getSource()).getX() + e.getX()) + "," + (((JButton)e.getSource()).getY() + e.getY()) + ")");
+        } else {
+            this.setTitle(teclasContenido + " - (" + e.getX() + "," + e.getY() + ")");
+
+        }
 
     }
 
@@ -118,9 +124,16 @@ public class Graphics extends JFrame implements MouseListener, MouseMotionListen
 
     @Override
     public void mouseMoved(java.awt.event.MouseEvent e) {
-        
+
+        if (e.getSource().getClass() == new JButton().getClass()) {
+            System.err.println("sep");
+            this.setTitle("Teclas - (" + (((JButton)e.getSource()).getX() + e.getX()) + "," + (((JButton)e.getSource()).getY() + e.getY()) + ")");
+        } else {
+            System.err.println("nop");
             this.setTitle(teclasContenido + " - (" + e.getX() + "," + e.getY() + ")");
-        
+
+        }
+
     }
 
     public class Cerrar extends WindowAdapter {
